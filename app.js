@@ -154,7 +154,7 @@ function mainMenu(person, people){
     break;
     case "descendants":
     // TODO: get person's descendants
-    usersResponse = displayDescendants(person);
+    usersResponse = displayDescendants(person, people); //found descendants
     break;
     case "restart":
     app(people); // restart
@@ -246,7 +246,7 @@ function displayPeople(people){
   }).join("\n"));
 }
 
-function displayPerson(person){
+function displayPerson(person, people){
   // print all of the information about a person:
   // height, weight, age, name, occupation, eye color.
   var personInfo = "First Name: " + person.firstName + "\n";
@@ -260,7 +260,7 @@ function displayPerson(person){
   personInfo += "Parents: " + person.parents + "\n";
   personInfo += "Current Spouse" + person.currentSpouse + "\n";
   // TODO: finish getting the rest of the information to display
-  alert(personInfo);
+  alert(personInfo); 
 }
 
 function listFullNames(people){
@@ -272,20 +272,34 @@ function listFullNames(people){
   return fullNameList;
 }
 
-// function displayDecendants(person, people) {
-// 	let nextPerson = people[i++]
-// 	if (person.id !=== people.parents) {
-// 		alert("This person does not have any descendants.");
-// 	}
+function displayDescendants(person, people) {
+  let foundChildrenArray = searchForChildren(person, people);
+  let descendantInfo = "Child/Children: " + listFullNames(foundChildrenArray) + "\n";
+  let foundDescendantsArray = getDescendants(person, people);
+  descendantInfo += "Grandchild/Grandchildren: " + listFullNames(foundDescendantsArray) + "\n";
+}
 
-// }
+function getDescendants(person, people){
+  let foundChildrenArray = searchForChildren(person, people);
+  if(foundChildrenArray.length === 0) {
+    return foundChildrenArray; 
+  }
+    for(let i = 0; i < foundChildrenArray.length; i++) {
+      getDescendants(foundChildrenArray[i], people);
+      foundChildrenArray.concat(foundChildrenArray);
+      console.log(foundChildrenArray)
+    }
+
+  return foundChildrenArray;
+}
 
 // function that prompts and validates user input
 function promptFor(question, valid){
   do{
     var response = prompt(question).trim();
-  } while(!response || !valid(response));
-  return response;
+  } 
+    while(!response || !valid(response));
+      return response;
 }
 
 // helper function to pass into promptFor to validate yes/no answers
