@@ -181,47 +181,63 @@ function searchByName(people){
 }
 
 function displayFamily(person, people) {
-	let familyInfo = "Parents: " + person.parents + "\n";
-  	familyInfo += "Current Spouse: " + person.currentSpouse + "\n";
-  	familyInfo += "Siblings: " + searchForSiblings(person, people) + "\n";
-  	familyInfo += "Child/Children: " + searchForChildren(person, people) + "\n";
+  let foundParentsArray = searchForParents(person, people);
+	let familyInfo = "Parents: " + listFullNames(foundParentsArray) + "\n";
+
+  let foundSpouseArray = searchForSpouse(person, people);
+	familyInfo += "Current Spouse: " + listFullNames(foundSpouseArray) + "\n";
+
+  let foundSiblingsArray = searchForSiblings(person, people);
+  familyInfo += "Siblings: " + listFullNames(foundSiblingsArray) + "\n";
+
+	let foundChildrenArray = searchForChildren(person, people);
+  familyInfo += "Child/Children: " + listFullNames(foundChildrenArray) + "\n";
+
   alert(familyInfo);
 }
 
+function searchForParents(person, people){
+  let filteredParentsArray = people.filter(function(el) {
+    for(i = 0; i < person.parents.length; i++) {
+      if(el.id === person.parents[i]) {
+        return true;
+      }
+    }
+  });
+  return filteredParentsArray;
+}
+
+function searchForSpouse(person, people){
+  let foundSpouseArray = people.filter(function(el) {
+    if(el.id === person.currentSpouse) {
+      return true;
+    }
+  });
+  return foundSpouseArray;
+}
 
 function searchForSiblings(person, people){
 	let filteredSiblingsArray = people.filter(function(el){
-		if (el.parents === person.parents){
-			return true;
-		}
+		for(i = 0; i < person.parents.length; i++) {
+      if(el.parents.includes(person.parents[i])){
+        if(el.id !== person.id)
+        {
+          return true;
+        }
+		  }
+    }
 	});
 	return filteredSiblingsArray;
-
-	// for (i = 0; i < people.length; i++){
-	// 	console.log(people[i].parents);
-	// 	if (people[i].parents === person.parents){
-	// 		filteredSiblingsArray.push(people.parents);
-	// 	}
-	// }
-	// return filteredSiblingsArray;
-
-	//let foundSiblings = filteredSiblingsArray;
-	//displayFamily(foundSiblings, people);
 }
 
 function searchForChildren(person, people){
-	let filteredChildrensArray = [];
-	for(i = 0; i < people.length; i++) {
-		if (person.id === people[i].parents){
-			filteredChildrensArray.push(people.id);
-		}
-		return filteredChildrensArray;
-	}
-	let foundChildren = filteredChildrensArray;
-	displayFamily(foundChildren, people);
+	let filteredChildrenArray = people.filter(function(el){
+    if(el.parents.includes(person.id)) {
+      return true;
+    }
+  });
+  return filteredChildrenArray;
 }
-
-
 
 // alerts a list of people
 function displayPeople(people){
@@ -236,7 +252,7 @@ function displayPerson(person){
   var personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
   personInfo += "Gender " + person.gender + "\n";
-  personInfo += "Age: " + person.age + "\n";
+  personInfo += "Age: " + getAge(person) + "\n";
   personInfo += "Height: " + person.height + "\n";
   personInfo += "Weight: " + person.weight + "\n";
   personInfo += "Eye Color: " + person.eyeColor + "\n";
@@ -245,6 +261,15 @@ function displayPerson(person){
   personInfo += "Current Spouse" + person.currentSpouse + "\n";
   // TODO: finish getting the rest of the information to display
   alert(personInfo);
+}
+
+function listFullNames(people){
+  let fullNameList = "";
+  for(let i = 0; i < people.length; i++){
+    fullNameList += people[i].firstName + " " + people[i].lastName + " ";
+  }
+
+  return fullNameList;
 }
 
 // function displayDecendants(person, people) {
@@ -271,4 +296,22 @@ function yesNo(input){
 // helper function to pass in as default promptFor validation
 function chars(input){
   return true; // default validation only
+}
+
+function getAge(person){
+  let dob = new Date(person.dob);
+  let currentDate = new Date();
+
+  let age = currentDate.getYear() - dob.getYear();
+  if(dob.getMonth() > currentDate.getMonth()) {
+    age--;
+  }
+
+  if(dob.getMonth() == currentDate.getMonth()) {
+    if(dob.getDate() > currentDate.getDate()) {
+      age--;
+    }
+  }
+
+  return age;
 }
