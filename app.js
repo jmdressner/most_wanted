@@ -191,8 +191,14 @@ function displayFamily(person, people) {
 
 function searchForSiblings(person, people){
 	let filteredSiblingsArray = people.filter(function(el){
-		if (el.parents === person.parents){
+		for(i = 0; i < people[i].parents.length; i++) {
+			if (el.parents.include(person.parents[i])){
+				for(j = 0; j < parents.length; j++){
+					return true;
+				}
 			return true;
+			}
+			return false;
 		}
 	});
 	return filteredSiblingsArray;
