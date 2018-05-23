@@ -1,1 +1,2 @@
 # most_wanted
+Welcome to Most Wanted! A person search program where you are able to search for a specific person, and then find out additional information about them. You are able to search for a person using either their name, a trait, or serveral traits to find them. Once you have located the person you are looking for, you are able to display a list of their attributes, family information, or descendants. Please follow the prompts as they appear on the screen to search for a person. Good Luck
