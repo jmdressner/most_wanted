@@ -1,4 +1,4 @@
-// You may modify this for testing purposes.
+
 const data = [
 	{
 		"id": 272822514,
@@ -11,7 +11,7 @@ const data = [
 		"eyeColor": "brown",
 		"occupation": "programmer",
 		"parents": [],
-		"currentSpouse": 401222887 //uma bob
+		"currentSpouse": 401222887
 	},
 	{
 		"id": 401222887,
@@ -24,7 +24,7 @@ const data = [
 		"eyeColor": "brown",
 		"occupation": "assistant",
 		"parents": [],
-		"currentSpouse": 272822514 // billy bob
+		"currentSpouse": 272822514 
 	},
 	{
 		"id": 409574486,
@@ -37,7 +37,7 @@ const data = [
 		"eyeColor": "brown",
 		"occupation": "landscaper",
 		"parents": [],
-		"currentSpouse": 260451248 // jon walkens
+		"currentSpouse": 260451248
 	},
 	{
 		"id": 260451248,
@@ -50,7 +50,7 @@ const data = [
 		"eyeColor": "brown",
 		"occupation": "assistant",
 		"parents": [],
-		"currentSpouse": 409574486 // michael walkens
+		"currentSpouse": 409574486
 	},
 	{
 		"id": 629807187,
@@ -63,7 +63,7 @@ const data = [
 		"eyeColor": "black",
 		"occupation": "nurse",
 		"parents": [],
-		"currentSpouse": 464142841 // jen pafoy
+		"currentSpouse": 464142841
 	},
 	{
 		"id": 464142841,
@@ -76,7 +76,7 @@ const data = [
 		"eyeColor": "black",
 		"occupation": "student",
 		"parents": [],
-		"currentSpouse": 629807187 // jack pafoy
+		"currentSpouse": 629807187
 	},
 	{
 		"id": 982411429,
@@ -89,7 +89,7 @@ const data = [
 		"eyeColor": "hazel",
 		"occupation": "architect",
 		"parents": [],
-		"currentSpouse": 595767575 // missuz potatoo
+		"currentSpouse": 595767575
 	},
 	{
 		"id": 595767575,
@@ -102,7 +102,7 @@ const data = [
 		"eyeColor": "blue",
 		"occupation": "architect",
 		"parents": [],
-		"currentSpouse": 982411429  // mister potatoo
+		"currentSpouse": 982411429 
 	},
 	{
 		"id": 693243224,
@@ -115,7 +115,7 @@ const data = [
 		"eyeColor": "hazel",
 		"occupation": "doctor",
 		"parents": [],
-		"currentSpouse": null // had children with mader madden
+		"currentSpouse": null
 	},
 	{
 		"id": 888201200,
@@ -128,7 +128,7 @@ const data = [
 		"eyeColor": "black",
 		"occupation": "landscaper",
 		"parents": [],
-		"currentSpouse": null // had children with joy madden
+		"currentSpouse": null
 	},
 	{
 		"id": 878013758,
@@ -140,8 +140,8 @@ const data = [
 		"weight": 118,
 		"eyeColor": "brown",
 		"occupation": "programmer",
-		"parents": [401222887], // mother is uma bob
-		"currentSpouse": 294874671 // dave pafoy
+		"parents": [401222887],
+		"currentSpouse": 294874671
 	},
 	{
 		"id": 951747547,
@@ -153,8 +153,8 @@ const data = [
 		"weight": 179,
 		"eyeColor": "blue",
 		"occupation": "nurse",
-		"parents": [401222887], // mother is uma bob
-		"currentSpouse": 159819275 // jasmine bob
+		"parents": [401222887],
+		"currentSpouse": 159819275
 	},
 	{
 		"id": 159819275,
@@ -166,8 +166,8 @@ const data = [
 		"weight": 156,
 		"eyeColor": "blue",
 		"occupation": "assistant",
-		"parents": [409574486, 260451248], // michael and jon walkens
-		"currentSpouse": 951747547 // ralph bob
+		"parents": [409574486, 260451248],
+		"currentSpouse": 951747547 
 	},
 	{
 		"id": 348457184,
@@ -179,7 +179,7 @@ const data = [
 		"weight": 235,
 		"eyeColor": "hazel",
 		"occupation": "landscaper",
-		"parents": [629807187, 464142841], // jack and jen pafoy
+		"parents": [629807187, 464142841],
 		"currentSpouse": null
 	},
 	{
@@ -192,8 +192,8 @@ const data = [
 		"weight": 112,
 		"eyeColor": "green",
 		"occupation": "doctor",
-		"parents": [629807187, 464142841], // jack and jen pafoy
-		"currentSpouse": 878013758 // jill pafoy
+		"parents": [629807187, 464142841], 
+		"currentSpouse": 878013758
 	},
 	{
 		"id": 931247228,
@@ -205,7 +205,7 @@ const data = [
 		"weight": 184,
 		"eyeColor": "brown",
 		"occupation": "landscaper",
-		"parents": [629807187, 464142841], // jack and jen pafoy
+		"parents": [629807187, 464142841],
 		"currentSpouse": null
 	},
 	{
@@ -218,7 +218,7 @@ const data = [
 		"weight": 249,
 		"eyeColor": "brown",
 		"occupation": "nurse",
-		"parents": [693243224, 888201200], // joy and mader madden
+		"parents": [693243224, 888201200],
 		"currentSpouse": null
 	},
 	{
@@ -231,7 +231,7 @@ const data = [
 		"weight": 187,
 		"eyeColor": "brown",
 		"occupation": "politician",
-		"parents": [693243224, 888201200], // joy and mader madden
+		"parents": [693243224, 888201200],
 		"currentSpouse": null
 	},
 	{
@@ -244,7 +244,7 @@ const data = [
 		"weight": 241,
 		"eyeColor": "brown",
 		"occupation": "assistant",
-		"parents": [693243224, 888201200], // joy and mader madden
+		"parents": [693243224, 888201200],
 		"currentSpouse": null
 	},
 	{
@@ -257,8 +257,8 @@ const data = [
 		"weight": 110,
 		"eyeColor": "blue",
 		"occupation": "assistant",
-		"parents": [693243224, 888201200], // joy and mader madden
-		"currentSpouse": 313997561 // ellen madden
+		"parents": [693243224, 888201200],
+		"currentSpouse": 313997561
 	},
 	{
 		"id": 313997561,
@@ -271,7 +271,7 @@ const data = [
 		"eyeColor": "blue",
 		"occupation": "doctor",
 		"parents": [],
-		"currentSpouse": 313207561 // mattias madden
+		"currentSpouse": 313207561
 	},
 	{
 		"id": 313998000,
@@ -283,7 +283,7 @@ const data = [
 		"weight": 100,
 		"eyeColor": "blue",
 		"occupation": "doctor",
-		"parents": [313207561, 313997561], // mattias and ellen madden
+		"parents": [313207561, 313997561],
 		"currentSpouse": null
 	}
 ];
