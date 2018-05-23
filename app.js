@@ -96,13 +96,23 @@ function searchByTraits(people) {
   if (filteredPeople.length > 1) {
    	alert("Multiple people found. A list of matching people will display on the next screen.")
    	displayPeople(filteredPeople);
-   	alert("Please enter another trait on the next screen.");
-   	searchByTraits(people);
-  }
+   	let userInput = prompt("Would you like to search by name or trait? Please enter 'name' or 'trait'.");
+   		if (userInput == 'name'){
+   			searchByName(people);
+   		}
+   		else if (userInput == 'trait'){
+   			searchByTraits(people);
+   		}
+   		else {
+   			alert("You entered an invalid search type! Please try again.");
+   			app(people);
+   		}
+   	}	
 
   let foundPerson = filteredPeople[0];
 
   mainMenu(foundPerson, people);
+
 }
 
 function searchByWeight(people, userInput) {
@@ -191,7 +201,7 @@ function mainMenu(person, people){
     app(people);
     break;
     case "quit":
-    return;
+    return; 
     default:
     return mainMenu(person, people);
   }
