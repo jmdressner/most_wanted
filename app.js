@@ -22,28 +22,74 @@ function app(people){
 }
 
 function searchByTraits(people) {
-  let userSearchChoice = prompt("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation'.");
+  let userSearchChoice = prompt("What would you like to search by? 'height', 'weight', 'eye color', 'gender', 'age', 'occupation', 'multiple traits'.");
   let filteredPeople;
 
   switch(userSearchChoice) {
     case "height":
-      filteredPeople = searchByHeight(people);
+      let userInputHeight = prompt("What is the person's height in inches?");
+      filteredPeople = searchByHeight(people, userInput);
       break;
     case "weight":
-      filteredPeople = searchByWeight(people);
+      let userInputWeight = prompt("How much does the person weigh?");
+      filteredPeople = searchByWeight(people, userInputWeight);
       break;
     // so on and so forth
     case "eye color":
-      filteredPeople = searchByEyeColor(people);
+    let userInputEyeColor = prompt("What is the person's eye color?")
+      filteredPeople = searchByEyeColor(people, userInputEyeColor);
       break;
+
     case "gender":
       filteredPeople = searchByGender(people);
-     break;
+      break;
+
     case "age":
-      filteredPeople = searchByAge(people);
+      let userInputAge = prompt("What is the person's age?")
+      filteredPeople = searchByAge(people, userInputAge);
       break;
     case "occupation":
-      filteredPeople = searchByOccupation(people);
+      userInputOccupation = prompt("What is the person's occupation?")
+      filteredPeople = searchByOccupation(people, userInputOccupation);
+      break;
+    case "multiple traits":
+      // 5, 120, blue, male, 65, farmer
+      // Parse by ','
+      // 0,0,0,farmer
+      let userInput = prompt("Please enter the traits as a list seperated by commas and enter a '0' for any values not used. (age, height, weight, occupation, eye color).");
+      let inputArray = userInput.split(",");
+      if(inputArray.length != 5) {
+        alert("Please enter five valid traits. If you have no value, please enter '0' in it's place.");
+        searchByTraits(people);
+      }
+      else {
+        let userInputAge = inputArray[0].trim();
+        let userInputHeight = inputArray[1].trim();
+        let userInputWeight = inputArray[2].trim();
+        let userInputOccupation = inputArray[3].trim();
+        let userInputEyeColor = inputArray[4].trim();
+        filteredPeople = people;
+
+        if(userInputAge != 0){
+          filteredPeople = searchByAge(filteredPeople, userInputAge);
+        }
+        
+        if(userInputHeight != 0){
+          filteredPeople = searchByHeight(filteredPeople, userInputHeight);
+        }
+        
+        if(userInputWeight != 0){  
+          filteredPeople = searchByWeight(filteredPeople, userInputWeight);
+        }
+
+        if(userInputOccupation != 0) {
+          filteredPeople = searchByOccuptaion(filteredPeople, userInputOccupation);
+        }
+
+        if(userInputEyeColor != 0) {
+          filteredPeople = searchByEyeColor(filteredPeople, userInputEyeColor);
+        }
+      }
       break;
 
     default:
@@ -52,31 +98,14 @@ function searchByTraits(people) {
       break;
   }  
 
-
   let foundPerson = filteredPeople[0];
 
   mainMenu(foundPerson, people);
-
 }
 
-function searchByWeight(people) {
-  let userInputWeight = prompt("How much does the person weigh?");
-
+function searchByWeight(people, userInput) {
   let newArray = people.filter(function (el) {
-    if(el.weight == userInputWeight) {
-     // for(i = 0; i < newArray.length; i++){
-       // newArray.push(filteredPeople);
-     // }
-      return true;
-    }
-  });
-}
-
-function searchByHeight(people) {
-  let userInputHeight = prompt("What is the person's height in inches?");
-
-  let newArray = people.filter(function (el) {
-    if(el.height == userInputHeight) {
+    if(el.weight == userInput) {
       return true;
     }
   });
@@ -84,11 +113,19 @@ function searchByHeight(people) {
   return newArray;
 }
 
-function searchByEyeColor(people) {
-  let userInputEyeColor = prompt("What is the person's eye color?");
-
+function searchByHeight(people, userInput) {
   let newArray = people.filter(function (el) {
-    if(el.eyeColor == userInputEyeColor) {
+    if(el.height == userInput) {
+      return true;
+    }
+  });
+
+  return newArray;
+}
+
+function searchByEyeColor(people, userInput) {
+  let newArray = people.filter(function (el) {
+    if(el.eyeColor == userInput) {
       return true;
     }
   });
@@ -108,11 +145,9 @@ function searchByGender(people) {
   return newArray;
 }
 
-function searchByAge(people) {
-  let userInputAge = prompt("What is the person's age?");
-
+function searchByAge(people, userInput) {
   let newArray = people.filter(function (el) {
-    if(el.age == userInputAge) {
+    if(el.age == userInput) {
       return true;
     }
   });
@@ -120,11 +155,9 @@ function searchByAge(people) {
   return newArray;
 }
 
-function searchByOccupation(people) {
-  let userInputOccupation = prompt("What is the person's occupation?");
-
+function searchByOccupation(people, userInput) {
   let newArray = people.filter(function (el) {
-    if(el.occupation == userInputOccupation) {
+    if(el.occupation == userInput) {
       return true;
     }
   });
@@ -147,14 +180,13 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    usersResponse = displayPerson(person);
+    usersResponse = displayPerson(person, people);
     break;
     case "family":
     usersResponse = displayFamily(person, people);
     break;
     case "descendants":
-    // TODO: get person's descendants
-    usersResponse = displayDescendants(person, people); //found descendants
+    usersResponse = displayDescendants(person, people);
     break;
     case "restart":
     app(people); // restart
@@ -257,13 +289,19 @@ function displayPerson(person, people){
   personInfo += "Weight: " + person.weight + "\n";
   personInfo += "Eye Color: " + person.eyeColor + "\n";
   personInfo += "Occupation: " + person.occupation + "\n";
-  personInfo += "Parents: " + person.parents + "\n";
-  personInfo += "Current Spouse" + person.currentSpouse + "\n";
+  let foundParentsArray = searchForParents(person, people);
+  personInfo += "Parents: " + listFullNames(foundParentsArray) + "\n";
+  let foundSpouseArray = searchForSpouse(person, people);
+  personInfo += "Current Spouse: " + listFullNames(foundSpouseArray) + "\n";
   // TODO: finish getting the rest of the information to display
   alert(personInfo); 
 }
 
 function listFullNames(people){
+  if(people.length == 0) {
+    return "No Data Found";
+  }
+
   let fullNameList = "";
   for(let i = 0; i < people.length; i++){
     fullNameList += people[i].firstName + " " + people[i].lastName + " ";
@@ -273,33 +311,34 @@ function listFullNames(people){
 }
 
 function displayDescendants(person, people) {
-  let foundChildrenArray = searchForChildren(person, people);
-  let descendantInfo = "Child/Children: " + listFullNames(foundChildrenArray) + "\n";
   let foundDescendantsArray = getDescendants(person, people);
-  descendantInfo += "Grandchild/Grandchildren: " + listFullNames(foundDescendantsArray) + "\n";
+  let descendantInfo = "Descendants: " + listFullNames(foundDescendantsArray) + "\n";
+  alert(descendantInfo);
 }
 
 function getDescendants(person, people){
   let foundChildrenArray = searchForChildren(person, people);
+
   if(foundChildrenArray.length === 0) {
     return foundChildrenArray; 
   }
-    for(let i = 0; i < foundChildrenArray.length; i++) {
-      getDescendants(foundChildrenArray[i], people);
-      foundChildrenArray.concat(foundChildrenArray);
-      console.log(foundChildrenArray)
-    }
 
-  return foundChildrenArray;
+  let resultDescendantsArray = foundChildrenArray;
+  for(let i = 0; i < foundChildrenArray.length; i++) {
+    let foundDescendantsArray = getDescendants(foundChildrenArray[i], people);
+    resultDescendantsArray = resultDescendantsArray.concat(foundDescendantsArray);
+  }
+
+  return resultDescendantsArray;
 }
 
 // function that prompts and validates user input
 function promptFor(question, valid){
   do{
     var response = prompt(question).trim();
-  } 
-    while(!response || !valid(response));
-      return response;
+  } while(!response || !valid(response));
+
+  return response;
 }
 
 // helper function to pass into promptFor to validate yes/no answers
